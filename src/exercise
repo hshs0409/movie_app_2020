@@ -1,0 +1,109 @@
+import React from 'react';
+import PropTypes from "prop-types";
+
+const foodILike = [
+  {
+    id:1,
+  name: 'Kimchi',
+  image:'https://i.ytimg.com/vi/eTucCw1w6Ak/maxresdefault.jpg',
+  rating:4.4
+  },
+  {
+    id:2,
+    name:"Kimbap",
+    image:"http://4.bp.blogspot.com/-pGAzmbNYGy0/UwA_WzES4KI/AAAAAAAACYY/pyWiojw8wxE/s1600/kimbap1.jpg",
+    rating:4.7
+  },
+  {
+    id:3,
+    name:"Doncasu",
+    image:"https://www.maangchi.com/wp-content/uploads/2015/02/donkkaseu-plate.jpg",
+    rating:4.6
+  }
+]
+
+function Food({name,picture,rating}){
+  return <div>
+    <h3>I like {name}</h3>
+    <h4>{rating} / 5.0</h4>
+    <img src={picture} alt={name}/>
+    </div>;
+}
+
+Food.propTypes={
+    name : PropTypes.string.isRequired,
+    picture : PropTypes.string.isRequired,
+    rating : PropTypes.number
+}
+
+function App() {
+  return (
+    <div>
+      {foodILike.map(dish => 
+        (<Food key={dish.id}  name ={dish.name} picture ={dish.image} rating={dish.rating}/>)
+        )}
+    </div>
+  );
+}
+
+export default App;
+
+
+/* Component 메소드 예시
+import React from 'react';
+import PropTypes from "prop-types";
+
+class App extends React.Component{
+  state={
+    count :0
+  };
+  add = () => {
+    this.setState(current => ({
+      count : current.count + 1
+    }));
+  }
+  minus = () => {
+    this.setState(current=> ({
+      count: current.count - 1
+    }))
+  }
+  
+  componentDidMount(){
+    console.log("component rendering");
+  }
+
+  componentDidUpdate(){
+    console.log("component updated");
+  }
+
+  // render -> DidMount -> DidUpdate 순으로 실행
+  render(){
+    console.log("I'm rendering first");
+    return (
+      <div>
+        <h1>The number is : {this.state.count} </h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    )
+  }
+}
+
+export default App;
+
+/*
+Component는 생성시에
+constructor()
+render()
+componentDidMount()
+순으로 메소드 호출
+
+Component는 업데이트시에
+render()
+componentDidUpdate() 순 메소드 호출
+
+Component 제거될 때
+componentWillUnmount() 메소드 호출
+*/
+
+*/
